@@ -1,14 +1,12 @@
-import { USER_INPUT_LENGTH } from '../constants/user';
+const PASSWORD_REG_EXP = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+const EMAIL_REG_EXP = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+const USERNAME_REG_EXP = /^[A-Za-z0-9_\-\.]{1,20}/;
+const BIOGRAPHY_REG_EXP = /^[A-Za-z0-9_\-\.]{1,50}/;
+const NAME_REG_EXP = /^[a-zA-Z\-]+$/;
 
-export const isUserValid = input => {
-  switch (input){
-    case !input:
-      return false;
-    case input.length > USER_INPUT_LENGTH.STANDART:
-      return false;
-  }
-};
 
-export const isRegistrationDataValid = ({ firstname, lastname, email, username, password }) => {
-
-};
+export const isPassword = value => PASSWORD_REG_EXP.test(value);
+export const isEmail = value => EMAIL_REG_EXP.test(value);
+export const isUsername = value => USERNAME_REG_EXP.test(value);
+export const isName = value => NAME_REG_EXP.test(value);
+export const isBiography = value => BIOGRAPHY_REG_EXP.test(value);

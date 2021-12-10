@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import { USER_IMAGE_STORAGE, USER_KEY_STORAGE } from '../constants/storage';
 import { userApi } from '../api/user-api';
+import { isUsername } from '../utils/user-validation';
 
 
 export const initialState = {
@@ -60,6 +61,7 @@ export const { setCredentials, removeCredentials, setImageUrl, setError, setToke
 // Actions
 export const login = (user) => async dispatch => {
   try {
+    if (!isUsername(user.username)){}
 
     const data = await dispatch(userApi.endpoints.login.initiate(user));
 
