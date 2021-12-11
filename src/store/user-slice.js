@@ -3,8 +3,9 @@ import jwt from 'jsonwebtoken';
 
 import { USER_IMAGE_STORAGE, USER_KEY_STORAGE } from '../constants/storage';
 import { userApi } from '../api/user-api';
-import { isUsername } from '../utils/user-validation';
+import { isPassword, isUsername } from '../utils/user-validation';
 
+const SECOND_IN_MILLISECONDS = 1000;
 
 export const initialState = {
   user: localStorage.getItem(USER_KEY_STORAGE) ? JSON.parse(localStorage.getItem(USER_KEY_STORAGE)) : null,
@@ -26,6 +27,7 @@ const slice = createSlice({
         firstName: userFromJWT.firstName,
         lastName: userFromJWT.lastName,
         email: userFromJWT.email,
+        exp: userFromJWT.exp,
       };
 
       localStorage.setItem(USER_KEY_STORAGE, JSON.stringify(user));
@@ -61,9 +63,11 @@ export const { setCredentials, removeCredentials, setImageUrl, setError, setToke
 // Actions
 export const login = (user) => async dispatch => {
   try {
-    if (!isUsername(user.username)){}
 
     const data = await dispatch(userApi.endpoints.login.initiate(user));
+
+    console.log(data);
+    dispatch(setCredentials(data.data));
 
   } catch (error) {
     dispatch(setError(error ?? 'Unexpected error'));
@@ -73,4 +77,21 @@ export const login = (user) => async dispatch => {
 
 export const logout = () => dispatch => {
   dispatch(removeCredentials());
+};
+
+export const checkToken = () => async (dispatch, getState) => {
+  const user = getState().user?.user;
+
+  // Token is expired, trying to refresh
+  if (user && user.exp && Date.now() >= user.exp * SECOND_IN_MILLISECONDS) {
+    dispatch(setTokenRenewingState(true));
+    const tokensRequest = await dispatch(userApi.endpoints.login.initiate(user));
+
+    if (tokensRequest.data) {
+      dispatch(setCredentials(tokensRequest.data));
+    } else {
+      dispatch(removeCredentials());
+    }
+    dispatch(setTokenRenewingState(false));
+  }
 };
