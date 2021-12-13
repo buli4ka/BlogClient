@@ -1,0 +1,41 @@
+.button {
+  display: inline-block;
+  background-color: var(--cl-black);
+  font-size: 1rem;
+  color: var(--cl-white);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: BrandonText, sans-serif;
+  transition: all 0.2s linear;
+}
+
+.buttonWithIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonWithIcon > svg {
+  margin-right: 5px;
+}
+
+.button:hover {
+  background: var(--cl-gray);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  background: var(--cl-white-gray);
+  opacity: 0.6;
+}
+
+.secondary {
+  background: var(--cl-gray-light);
+  color: var(--cl-black) 000;
+}
+
+.secondary:hover {
+  background: var(--cl-gray-middle);
+}

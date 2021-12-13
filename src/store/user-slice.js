@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import jwt from 'jsonwebtoken';
+import axios from 'axios';
 
-import { USER_IMAGE_STORAGE, USER_KEY_STORAGE } from '../constants/storage';
-import { userApi } from '../api/user-api';
-import { isPassword, isUsername } from '../utils/user-validation';
+import { USER_IMAGE_STORAGE, USER_KEY_STORAGE } from 'constants/storage';
+import { userApi } from 'api/user-api';
+import { getFormDataIcon } from 'utils/getImageBody';
 
 const SECOND_IN_MILLISECONDS = 1000;
 
@@ -67,8 +68,27 @@ export const login = (user) => async dispatch => {
     const data = await dispatch(userApi.endpoints.login.initiate(user));
 
     console.log(data);
-    dispatch(setCredentials(data.data));
+    // dispatch(setCredentials(data.data));
 
+  } catch (error) {
+    dispatch(setError(error ?? 'Unexpected error'));
+
+  }
+};
+
+export const register = (user) => async dispatch => {
+  try {
+    console.log(user);
+    const data = await dispatch(userApi.endpoints.registration.initiate(user));
+
+    if (user.icon){
+      await axios.post(
+        process.env.REACT_APP_API_BASE_URL +`icon/addOrUpdateImage/${data.data.id}`
+        , getFormDataIcon(user.icon),
+      );
+    }
+    console.log(data);
+    dispatch(setCredentials(data?.data));
   } catch (error) {
     dispatch(setError(error ?? 'Unexpected error'));
 
@@ -79,10 +99,20 @@ export const logout = () => dispatch => {
   dispatch(removeCredentials());
 };
 
+export const update = (user) => async dispatch => {
+  try {
+    const data = await dispatch(userApi.endpoints.update.initiate(user));
+
+  } catch (error) {
+    dispatch(setError(error ?? 'Unexpected error'));
+
+  }
+
+};
 export const checkToken = () => async (dispatch, getState) => {
   const user = getState().user?.user;
 
-  // Token is expired, trying to refresh
+    // Token is expired, trying to refresh
   if (user && user.exp && Date.now() >= user.exp * SECOND_IN_MILLISECONDS) {
     dispatch(setTokenRenewingState(true));
     const tokensRequest = await dispatch(userApi.endpoints.login.initiate(user));

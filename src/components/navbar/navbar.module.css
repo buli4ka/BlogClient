@@ -1,0 +1,43 @@
+.nav {
+    padding-left: 20vw;
+    padding-right: 20vw;
+    overflow: hidden;
+    background-color:#ff9400;
+    height: 50px;
+
+}
+.navButton {
+    float: right;
+    color: black;
+    text-align: center;
+    padding: 1em 1.5em;
+    text-decoration: none;
+    font-size: 16px;
+    margin-right:1vw ;
+
+}
+.navButton:hover {
+    background-color: #ddd;
+    color: black;
+    opacity: 50%;
+}
+.loginChoice:hover{
+    color:rgba(0, 0, 0, 0.3);
+    font-size: 30px;
+}
+.themeButton{
+    background-color: #19181f;
+    color: #e2d4c4;
+    float: right;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 16px;
+}
+.buttonIcon {
+    margin: 0;
+}
