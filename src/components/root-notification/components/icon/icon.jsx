@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { TYPES } from '../../../../constants/notifications';
-
+import { TYPES } from 'constants/notifications';
 import { ReactComponent as WarningIcon } from 'assets/icons/question-mark.svg';
 import { ReactComponent as ErrorIcon } from 'assets/icons/warning.svg';
 import { ReactComponent as SuccessIcon } from 'assets/icons/check-mark.svg';

@@ -5,7 +5,8 @@ import { baseQuery } from './base-query';
 
 export const userApi = createApi({
   reducerPath: 'userFromApi',
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_BASE_URL }), endpoints: (builder) => ({
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_BASE_URL }),
+  endpoints: (builder) => ({
     registration: builder.mutation({
       query: userRegistrationData => ({
         url: 'user/register',

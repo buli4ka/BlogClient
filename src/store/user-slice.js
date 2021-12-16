@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
 
+import { showErrorNotification } from './notification-slice';
+
 import { USER_IMAGE_STORAGE, USER_KEY_STORAGE } from 'constants/storage';
 import { userApi } from 'api/user-api';
 import { getFormDataIcon } from 'utils/getImageBody';
@@ -65,10 +67,14 @@ export const { setCredentials, removeCredentials, setImageUrl, setError, setToke
 export const login = (user) => async dispatch => {
   try {
 
-    const data = await dispatch(userApi.endpoints.login.initiate(user));
+    const { data, error } = await dispatch(userApi.endpoints.login.initiate(user));
 
-    console.log(data);
-    // dispatch(setCredentials(data.data));
+    if (error){
+      console.log(error.data);
+
+      return dispatch(showErrorNotification(error.data.message));
+    }
+    dispatch(setCredentials(data));
 
   } catch (error) {
     dispatch(setError(error ?? 'Unexpected error'));
@@ -88,7 +94,7 @@ export const register = (user) => async dispatch => {
       );
     }
     console.log(data);
-    dispatch(setCredentials(data?.data));
+    // dispatch(setCredentials(data?.data));
   } catch (error) {
     dispatch(setError(error ?? 'Unexpected error'));
 

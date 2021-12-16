@@ -1,0 +1,14 @@
+.input {
+  border: none;
+  color: var(--cl-black);
+  border-radius: 24px;
+  font-size: 1rem;
+  margin: 1rem;
+  padding: 1rem;
+  max-width:inherit;
+  /*background-color: inherit;*/
+}
+
+.error {
+  border-color: var(--cl-red) !important;
+}

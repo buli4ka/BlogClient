@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Magnifier from 'react-magnifier';
+// import Magnifier from 'react-magnifier';
 import { CarouselProvider,
   Slider,
   Slide,

@@ -2,8 +2,8 @@ import React, { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactDOM from 'react-dom';
 
-import LoginModal from '../../login-modal/login-modal';
 import Modal from '../../modal/modal';
+import AuthModal from '../auth-modal/auth-modal';
 
 import { useEventListener } from 'hooks/use-event-listener';
 import { MODALS } from 'constants/modals';
@@ -11,7 +11,7 @@ import { getVisibleModalsSelector, hideModal, hideAllModal } from 'store/modal-s
 
 
 const ModalContent = {
-  [MODALS.LOGIN]: LoginModal,
+  [MODALS.AUTHENTICATE]: AuthModal,
 };
 
 const modalRoot = document.createElement('div');

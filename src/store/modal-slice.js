@@ -10,7 +10,7 @@ const modalItemTemplate = {
 
 export const initialState = {
   modals: {
-    [MODALS.LOGIN]: { ...modalItemTemplate },
+    [MODALS.AUTHENTICATE]: { ...modalItemTemplate },
     [MODALS.REGISTRATION]: { ...modalItemTemplate },
     [MODALS.COMMENT]: { ...modalItemTemplate },
   },

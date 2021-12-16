@@ -6,10 +6,12 @@ import Router from './router';
 import { checkToken, userSelector } from './store/user-slice';
 import Loader from './components-ui/loader';
 import Navbar from './components/navbar/navbar';
+import { selectTheme } from './store/theme-slice';
 
 function App() {
   const { user, isRenewing, error } = useSelector(userSelector);
   const dispatch = useDispatch();
+  const theme = useSelector(selectTheme);
 
   // useEffect(() => dispatch(checkToken()), [dispatch]);
 
@@ -20,7 +22,7 @@ function App() {
   return (
     <>
       <Navbar user={user} />
-      <Router user={user} error={error} />
+      <Router user={user} error={error} theme={theme} />
     </>
   );
 

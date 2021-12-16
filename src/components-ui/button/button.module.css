@@ -1,6 +1,6 @@
 .button {
   display: inline-block;
-  background-color: var(--cl-black);
+  background-color: inherit;
   font-size: 1rem;
   color: var(--cl-white);
   border: none;
@@ -15,6 +15,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 
 .buttonWithIcon > svg {
@@ -22,7 +23,10 @@
 }
 
 .button:hover {
-  background: var(--cl-gray);
+  background: var(--cl-gray-light);
+  color: black;
+  opacity: 50%;
+
 }
 
 .button:disabled {

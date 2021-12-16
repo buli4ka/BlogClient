@@ -36,9 +36,9 @@ const RootNotification = ({ testId = 'root-notification' }) => {
     >
       <LayoutContainer>
         <div className={styles.info} data-testid="notificationBanner">
-          <span>
-            <Icon type={type} />
-          </span>
+          {/*<span>*/}
+          {/*  <Icon type={type} />*/}
+          {/*</span>*/}
           <h2 className={styles.message}>{message}</h2>
         </div>
       </LayoutContainer>

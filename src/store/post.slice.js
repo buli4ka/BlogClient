@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {
   posts: [],
-  filteredPosts: [],
   selectedPost: {},
   searchText: null,
   submitNotification: null,
@@ -11,7 +10,7 @@ export const initialState = {
 
 
 const slice = createSlice({
-  name: 'orders',
+  name: 'userPosts',
   initialState,
   reducers: {
     selectPost: (state, { payload }) => {
