@@ -20,10 +20,7 @@ function App() {
   }
 
   return (
-    <>
-      <Navbar user={user} />
-      <Router user={user} error={error} theme={theme} />
-    </>
+    <Router user={user} error={error} theme={theme} />
   );
 
 }

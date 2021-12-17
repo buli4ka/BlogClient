@@ -10,9 +10,11 @@ import styles from './navbar.module.css';
 import { logout } from 'store/user-slice';
 import Button from 'components-ui/button/button';
 import { ReactComponent as UserIcon } from 'assets/icons/user-icon.svg';
+import { ReactComponent as LogoutIcon } from 'assets/icons/logout.svg';
 import { ReactComponent as SunIcon } from 'assets/icons/sun.svg';
 import { ReactComponent as MoonIcon } from 'assets/icons/moon.svg';
 import { ReactComponent as LogoIcon } from 'assets/icons/logo.svg';
+import { ReactComponent as CreatePost } from 'assets/icons/craete-post.svg';
 import useModal from 'hooks/use-modal';
 import { ROUTES } from 'constants/routes';
 
@@ -26,24 +28,29 @@ const Navbar = (user) => {
   });
 
   const logoutHandler = () => {
-    dispatch(changeTheme(!theme));
-    if (history) {
-      history.push(ROUTES.MAIN);
-    }
+    dispatch(logout());
+    history.push(ROUTES.MAIN);
+
   };
 
   return (
     <nav className={styles.nav}>
       <Button
-        className={styles.logoButton} renderIcon={() => <LogoIcon />} onClick={() => history ? history.push(ROUTES.MAIN):null}
+        className={styles.logoButton} renderIcon={() => <LogoIcon />} onClick={() => history.push(ROUTES.MAIN)}
       />
 
       {user.user
-        ? <Button className={styles.navButton} renderIcon={() => <UserIcon />} onClick={()=>dispatch(logout())} title="Logout" />
+        ? (
+          <>
+            <Button className={styles.navButton} renderIcon={() => <LogoutIcon />} onClick={logoutHandler} title="Logout" />
+            <Button className={styles.navButton} renderIcon={() => <UserIcon />} onClick={() => history.push(ROUTES.PROFILE)} title="Profile" />
+            <Button className={styles.navButton} renderIcon={() => <CreatePost />} onClick={()=>history.push(ROUTES.CREATE_POST)} title="Create post" />
 
-        :
-        <Button className={styles.navButton} renderIcon={() => <UserIcon />} onClick={()=>authenticateModal()} title="Authenticate" />}
-      <Button className={styles.navButton} renderIcon={() => theme ? <MoonIcon /> : <SunIcon />} title={theme?'Light':'Dark'} onClick={logoutHandler} />
+          </>
+        )
+
+        :<Button className={styles.navButton} renderIcon={() => <UserIcon />} onClick={()=>authenticateModal()} title="Authenticate" />}
+      <Button className={styles.navButton} renderIcon={() => theme ? <MoonIcon /> : <SunIcon />} title={theme?'Light':'Dark'} onClick={()=> dispatch(changeTheme(!theme))} />
 
 
     </nav>

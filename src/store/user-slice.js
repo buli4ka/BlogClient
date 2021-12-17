@@ -70,9 +70,7 @@ export const login = (user) => async dispatch => {
     const { data, error } = await dispatch(userApi.endpoints.login.initiate(user));
 
     if (error){
-      console.log(error.data);
-
-      return dispatch(showErrorNotification(error.data.message));
+      return dispatch(showErrorNotification(error.data.message?? error.data.title));
     }
     dispatch(setCredentials(data));
 
@@ -84,17 +82,18 @@ export const login = (user) => async dispatch => {
 
 export const register = (user) => async dispatch => {
   try {
-    console.log(user);
-    const data = await dispatch(userApi.endpoints.registration.initiate(user));
+    const { data, error } = await dispatch(userApi.endpoints.registration.initiate(user));
 
+    if (error){
+      return dispatch(showErrorNotification(error.data.message?? error.data.title));
+    }
     if (user.icon){
       await axios.post(
         process.env.REACT_APP_API_BASE_URL +`icon/addOrUpdateImage/${data.data.id}`
         , getFormDataIcon(user.icon),
       );
     }
-    console.log(data);
-    // dispatch(setCredentials(data?.data));
+    dispatch(setCredentials(data));
   } catch (error) {
     dispatch(setError(error ?? 'Unexpected error'));
 

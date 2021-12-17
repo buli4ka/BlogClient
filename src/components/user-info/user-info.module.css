@@ -1,0 +1,9 @@
+.userInfo {
+    padding: 2vw;
+}
+
+.userInfo span {
+    display: flex;
+    text-align: center;
+    align-items: center;
+}

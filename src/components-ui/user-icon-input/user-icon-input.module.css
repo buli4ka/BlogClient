@@ -1,0 +1,66 @@
+
+.uploadBtnWrapper {
+    display: block;
+    position: relative;
+    padding-top: 5px;
+    padding-left: 35px;
+    margin-bottom: 25px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #999999;
+    font-size: 12px;
+}
+
+.uploadBtnWrapper input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.uploadBtnWrapper label {
+    cursor: pointer;
+    width: 100%;
+
+
+}
+
+.checkmark {
+    margin-top: 5vh;
+    margin-left: 30%;
+    margin-right: 30%;
+    position: absolute;
+    height: 20vh;
+    width: auto;
+
+    border: thin solid #999;
+
+    border-radius: 20px;
+}
+
+.fileUpload {
+    display: inline-block;
+    position: relative;
+    padding: 6px;
+    cursor: pointer;
+    width: 250px;
+
+}
+
+.imgWrap {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+
+}
+.imgWrap img{
+    width: auto;
+    height: 100%;
+}
+.fileUpload input {
+    display: none;
+}

@@ -1,7 +1,7 @@
 export const ROUTES = {
   MAIN: '/',
   PROFILE: '/profile',
-  // POST: '/post/:id',
+  CREATE_POST: '/post/create',
   SUBS: '/subscribers/:id',
   SUBSD: '/subscribed/:id',
   AUTHOR_PROFILE: '/profile/author/:id',

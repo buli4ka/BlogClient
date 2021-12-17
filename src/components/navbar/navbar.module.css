@@ -5,6 +5,12 @@
     background-color: #ff9400;
     height: 50px;
 }
+@media (max-width: 500px) {
+    .nav{
+        padding-left: 10vw;
+        padding-right: 10vw;
+    }
+}
 
 .navButton {
     float: right;

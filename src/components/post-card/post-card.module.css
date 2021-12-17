@@ -1,11 +1,11 @@
 .card {
-    background-color: #ff9400;
+    background-color: var(--cl-orange);
     margin: 1vw;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     word-break: break-all;
     overflow: hidden;
-    padding-bottom: 30px;
+    /*padding-bottom: 30px;*/
     cursor: pointer;
 }
 
@@ -23,24 +23,57 @@
     width: 100%;
     height: 250px;
 }
-@media (max-width: 667px) {
-    .img {
-        height: 150px;
-    }
-}@media (max-width: 900px) {
+
+@media (max-width: 1440px) {
     .img {
         height: 200px;
     }
 }
 
-@media (max-width: 500px) {
+
+@media (max-width: 1160px) {
     .img {
-        height: 100px;
+        height: 180px;
     }
 }
 
-.text{
+@media (max-width: 600px) {
+    .img {
+        height: 150px;
+    }
+}
+
+@media (max-width: 500px) {
+    .img {
+        height: 250px;
+    }
+}
+
+@media (max-width: 370px) {
+    .img {
+        height: 180px;
+    }
+}
+
+.text {
+    margin: 10px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+}
+
+.quantityButton {
+    display: inline-block !important;
+    margin-right: 15px;
+}
+
+.quantityButton:hover {
+/*    background-color: inherit!important;*/
+/*    opacity: 100%!important;*/
+}
+
+.createdSpan {
+    /*display: block;*/
+    float: right;
+
 }

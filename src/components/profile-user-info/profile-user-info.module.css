@@ -1,0 +1,52 @@
+.profileInfo {
+    /*margin: 2vw;*/
+    display: flex;
+    flex-direction: row;
+    /*justify-content:;*/
+    width: 80%;
+
+}
+
+.avatarInfo {
+    margin: 2vh 2vw;
+    padding: 2vh 2vw;
+    width: 60%;
+}
+
+
+.subs {
+    width: 100%;
+    /*padding: 7%;*/
+}
+
+.subs button:first-child {
+    float: left;
+    margin: 10px;
+}
+
+.subs button:last-child {
+    float: none;
+    margin: 10px;
+}
+
+.userInfo {
+    padding: 2vw;
+}
+
+.userInfo span {
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+.img {
+    width: 100%;
+}
+
+#imageUpload {
+    display: none;
+}
+
+#profileImage {
+    cursor: pointer;
+}
