@@ -27,12 +27,14 @@ const AuthConditionForm = ({ condition }) => {
   const Login = (
     <>
       <Input
-        className={styles.userInput} name="username" value={user.username}
+        className={styles.userInput} name="username"
+        value={user.username}
         onChange={handleChange}
         type="text" placeholder="Username"
       />
       <Input
-        className={styles.userInput} name="hashedPassword" value={user.hashedPassword}
+        className={styles.userInput} name="hashedPassword"
+        value={user.hashedPassword}
         onChange={handleChange}
         type="password" placeholder="Password"
       />
@@ -41,22 +43,26 @@ const AuthConditionForm = ({ condition }) => {
   const Register = (
     <>
       <Input
-        className={styles.userInput} name="firstName" value={user.firstName}
+        className={styles.userInput} name="firstName"
+        value={user.firstName}
         onChange={handleChange}
         placeholder="FirstName"
       />
       <Input
-        className={styles.userInput} name="lastName" value={user.lastName}
+        className={styles.userInput} name="lastName"
+        value={user.lastName}
         onChange={handleChange}
         placeholder="LastName"
       />
       <Input
-        className={styles.userInput} name="email" value={user.email}
+        className={styles.userInput} name="email"
+        value={user.email}
         onChange={handleChange}
         placeholder="Email"
       />
       <Textarea
-        className={styles.userInput} name="biography" value={user.biography}
+        className={styles.userInput} name="biography"
+        value={user.biography}
         onChange={handleChange}
         placeholder="Biography"
       />

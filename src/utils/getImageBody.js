@@ -1,14 +1,17 @@
-export const getFormDataImages = (images = [])=>{
-  let fd = new FormData();
-  let result = [];
+import axios from 'axios';
 
-  for (let i in images) {
+export const uploadImages = async ( images, id )=>{
+  let fd = new FormData();
+
+  for (let i = 0; i < images.length; i++) {
     fd = new FormData();
     fd.append('File', images[i]);
-    result.push(fd);
-  }
+    await axios.post(
+      process.env.REACT_APP_API_BASE_URL + 'image/addPostImage/' + id
+      , fd,
+    );
 
-  return result;
+  }
 };
 
 export const getFormDataIcon = (image)=>{

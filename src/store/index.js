@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 
-
+import postSlice from './post-slice';
 import userSlice from './user-slice';
 import modalSlice from './modal-slice';
 import themeSlice from './theme-slice';
@@ -14,6 +14,7 @@ export const reducer = combineReducers({
   user: userSlice,
   modal: modalSlice,
   theme: themeSlice,
+  post: postSlice,
   notification: notificationSlice,
 
   [userApi.reducerPath]: userApi.reducer,
@@ -26,7 +27,6 @@ const store = configureStore({
   middleware: getDefaultMiddleware => [...getDefaultMiddleware()
     , userApi.middleware
     , postApi.middleware
-    ,
   ],
 });
 

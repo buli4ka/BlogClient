@@ -12,3 +12,8 @@
     flex-direction: column;
 }
 
+.form button{
+    float: right;
+    background-color: var(--cl-orange);
+    border-radius: 25px;
+}

@@ -1,20 +1,31 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import styles from './create-post-page.module.css';
 
+import { createPost } from 'store/post-slice';
 import MultipleImageInput from 'components-ui/multiple-image-input/multiple-image-input';
 import Input from 'components-ui/input/input';
 import Textarea from 'components-ui/textarea/textarea';
+import Button from 'components-ui/button/button';
+import { ROUTES } from 'constants/routes';
 
 
 const CreatePostPage = () => {
-  const [post, setPost]=useState({});
-
+  const [post, setPost] = useState({});
+  const [postImages, setPostImages] = useState([]);
+  const dispatch = useDispatch();
+  const history = useHistory();
   const handleChange = ({ target: { value, name } }) => setPost({ ...post, [name]: value });
-  const addImages = (images)=>{
-    setPost({ ...post, ['images']: images });
+  const addImages = (images) => {
+    setPostImages(images);
   };
+  const AddPost = async () => {
+    await dispatch(createPost(post, postImages));
 
+    history.push(ROUTES.PROFILE);
+  };
 
   return (
     <div>
@@ -37,7 +48,7 @@ const CreatePostPage = () => {
             placeholder="Text"
           />
         </div>
-        {/*<Button disabled={isLoading} onClick={Add}>Add post</Button>*/}
+        <Button onClick={AddPost} title="Add post" />
       </form>
     </div>
   );
