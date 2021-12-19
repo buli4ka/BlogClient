@@ -32,8 +32,8 @@ const ProfileUserInfo = ({ user }) => {
           onChange={filesChangeHandler}
         />
         <div className={styles.subs}>
-          <Button onClick={() => history.push(ROUTES.SUBS)} title={`Subscribers ${user.quantityOfSubscribers}`} />
-          <Button onClick={() => history.push(ROUTES.SUBSD)} title={`Subscribed ${user.quantityOfSubscribed}`} />
+          <Button onClick={() => history.push(ROUTES.SUBS+user.id)} title={`Subscribers ${user.quantityOfSubscribers}`} />
+          <Button onClick={() => history.push(ROUTES.SUBSD+user.id)} title={`Subscribed ${user.quantityOfSubscribed}`} />
         </div>
       </div>
       <div>

@@ -41,11 +41,11 @@ const ProfileAuthorInfo = ({ author }) => {
         />
         <div className={styles.subs}>
           <Button
-            onClick={() => history.push(ROUTES.SUBS)}
+            onClick={() => history.push(ROUTES.SUBS+author.id)}
             title={`Subscribers ${author.quantityOfSubscribers}`}
           />
           <Button
-            onClick={() => history.push(ROUTES.SUBSD)}
+            onClick={() => history.push(ROUTES.SUBSD+author.id)}
             title={`Subscribed ${author.quantityOfSubscribed}`}
           />
         </div>

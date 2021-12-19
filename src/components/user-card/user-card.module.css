@@ -1,0 +1,23 @@
+.author{
+
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 34px;
+    margin: 2rem;
+    padding: 1rem;
+}
+.author img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.author span{
+    text-align: center;
+    padding: 2rem;
+    font-size: 24px;
+}
+.author:hover{
+    opacity: 30%;
+    background-color: gray;
+}
