@@ -54,7 +54,25 @@ export const createPost = (post, images) => async (dispatch, getState) => {
 
   }
 };
+export const deletePost = (postId) => async (dispatch, getState) => {
+  const authorId = getState().user.user.id;
 
+  try {
+    if (!postId || !authorId){
+      return dispatch(showErrorNotification(NOTIFICATIONS.NOT_AUTHORIZED));
+
+    }
+    const { error } = await dispatch(postApi.endpoints.deletePost.initiate({ authorId, postId }));
+
+    if (error) {
+      return dispatch(showErrorNotification(error.data.message ?? error.data.title));
+    }
+
+  } catch (error) {
+    dispatch(showErrorNotification(error ?? 'Unexpected error'));
+
+  }
+};
 export const addLikeToPost =(postId)=>async (dispatch, getState)=>{
   const userId = getState().user.user?.id;
 

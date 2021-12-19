@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './post-card.module.css';
 
 import Button from 'components-ui/button/button';
 import { ReactComponent as HeartIcon } from 'assets/icons/heart.svg';
-import { ReactComponent as RedHeartIcon } from 'assets/icons/heart-red.svg';
+import { ReactComponent as ClosedBinIcon } from 'assets/icons/closed-bin.svg';
 import { normalizeDate } from 'utils/normalize-date';
 import noImage from 'assets/icons/NoImage34.png';
 import useModal from 'hooks/use-modal';
 import { MODAL_SIZES, MODALS } from 'constants/modals';
-import { addLikeToPost } from 'store/post-slice';
+import { addLikeToPost, deletePost } from 'store/post-slice';
+import { userSelector } from 'store/user-slice';
 
 const PostCard = ({ post }) => {
-  // const [isLiked, setIsLiked] = useState(false);
+  const currentUser = useSelector(userSelector).user;
+  const [isCurrentUserPost, setIsCurrentUserPost] = useState(currentUser.id === post.authorId);
   const dispatch = useDispatch();
   const [postModal] = useModal(MODALS.POST, {
     size: MODAL_SIZES.LARGE,
@@ -24,14 +26,28 @@ const PostCard = ({ post }) => {
     window.location.reload();
   };
 
+  const removePost = async ()=>{
+    await dispatch(deletePost(post.id));
+    window.location.reload();
+
+  };
+
   return (
     <div className={styles.card}>
+
       <img
         onClick={()=>postModal({ postId: post.id })}
         className={styles.img}
         src={post.previewImage?? noImage}
         alt="Post"
       />
+      {isCurrentUserPost && (
+        <Button
+          className={styles.bin}
+          renderIcon={() => <ClosedBinIcon />}
+          onClick={removePost}
+        />
+      )}
       <div className={styles.container}>
         <h4>
           <b>{post.title}</b>

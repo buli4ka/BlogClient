@@ -20,6 +20,12 @@ export const postApi = createApi({
         body: post,
       }),
     }),
+    deletePost: builder.mutation({
+      query: ({ postId, authorId }) => ({
+        url: `post/DeletePost?postId=${postId}&authorId=${authorId}`,
+        method: 'DELETE',
+      }),
+    }),
     addPostLike: builder.mutation({
       query: (likeBody)=>({
         url: 'post/addLike',
