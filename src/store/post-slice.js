@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { uploadImages } from '../utils/getImageBody';
+import { NOTIFICATIONS } from '../constants/notifications';
 
 import { showErrorNotification } from './notification-slice';
 
@@ -52,4 +53,24 @@ export const createPost = (post, images) => async (dispatch, getState) => {
     dispatch(showErrorNotification(error ?? 'Unexpected error'));
 
   }
+};
+
+export const addLikeToPost =(postId)=>async (dispatch, getState)=>{
+  const userId = getState().user.user?.id;
+
+  try {
+    if (!userId){
+      return dispatch(showErrorNotification(NOTIFICATIONS.NOT_AUTHORIZED));
+    }
+    const { data, error } = await dispatch(postApi.endpoints.addPostLike.initiate({ postId, userId }));
+
+    if (error) {
+      return dispatch(showErrorNotification(error.data.message ?? error.data.title));
+    }
+  } catch (error){
+    dispatch(showErrorNotification(error ?? 'Unexpected error'));
+
+  }
+
+
 };

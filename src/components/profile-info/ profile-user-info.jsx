@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import UserInfo from '../user-info/user-info';
+import PostList from '../post-list/post-list';
 
 import styles from './profile-user-info.module.css';
 
@@ -10,12 +11,15 @@ import UserIconInput from 'components-ui/user-icon-input/user-icon-input';
 import Input from 'components-ui/input/input';
 import Button from 'components-ui/button/button';
 import { ROUTES } from 'constants/routes';
+
 const ProfileUserInfo = ({ user }) => {
   const history = useHistory();
   const [imagePreview, setImagePreview] = useState( user.iconUrl ?? noImage);
-
   const filesChangeHandler = (preview, updatedFile)=>{
     setImagePreview(preview);
+  };
+  const openLikedPosts = ()=>{
+    history.push(ROUTES.LIKED_POSTS+user.id);
   };
 
   return (
@@ -32,11 +36,14 @@ const ProfileUserInfo = ({ user }) => {
           <Button onClick={() => history.push(ROUTES.SUBSD)} title={`Subscribed ${user.quantityOfSubscribed}`} />
         </div>
       </div>
-
-
-      <UserInfo user={user} />
-
-
+      <div>
+        <UserInfo user={user} />
+        <Button
+          className={styles.likedPostsButton}
+          title="Liked posts"
+          onClick={openLikedPosts}
+        />
+      </div>
     </div>
   );
 };

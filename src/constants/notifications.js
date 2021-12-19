@@ -11,7 +11,8 @@ export const NOTIFICATIONS = {
   PASSWORD_NOT_VALID: '',
   EMAIL_NOT_VALID: '',
 
-  RESPONSE_ERROR: 'Something went wrong. Check network connection and try again.', //done
+  RESPONSE_ERROR: 'Something went wrong. Check network connection and try again.',
+  NOT_AUTHORIZED: 'You are not logged in, please authorize to continue',
 
 
 };

@@ -7,6 +7,9 @@ export const postApi = createApi({
     getAllPosts: builder.query({
       query: () => 'post/getAll',
     }),
+    getPreviewsById: builder.query({
+      query: userId => `post/getPreviewsById/${userId}`,
+    }),
     getPostById: builder.query({
       query: id => `post/getById/${id}`,
     }),
@@ -17,12 +20,24 @@ export const postApi = createApi({
         body: post,
       }),
     }),
+    addPostLike: builder.mutation({
+      query: (likeBody)=>({
+        url: 'post/addLike',
+        method: 'POST',
+        body: likeBody,
+      }),
+    }),
+
   }),
 });
 
 
 export const {
   useGetAllPostsQuery,
+  useGetPreviewsByIdQuery,
   useGetPostByIdQuery,
+  useLazyGetPostByIdQuery,
+
   useCreatePostMutation,
+  useAddPostMutation,
 } = postApi;

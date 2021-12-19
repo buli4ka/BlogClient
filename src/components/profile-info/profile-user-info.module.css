@@ -38,7 +38,11 @@
     text-align: center;
     align-items: center;
 }
-
+.likedPostsButton{
+    float: right;
+    background-color: var(--cl-orange);
+    border-radius: 34px;
+}
 .img {
     width: 100%;
 }

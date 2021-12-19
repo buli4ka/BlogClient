@@ -60,6 +60,9 @@ export const userApi = createApi({
     getSubscribed: builder.query({
       query: id => `user/getUserSubscribed/${id}`,
     }),
+    getIsSubscribed: builder.query({
+      query: ({ userId, authorId }) => `user/isUserSubscribed?userId=${userId}&authorId=${authorId}`,
+    }),
 
   }),
 });
@@ -74,4 +77,5 @@ export const {
   useGetAuthorByIdQuery,
   useGetSubscribersQuery,
   useGetSubscribedQuery,
+  useGetIsSubscribedQuery,
 } = userApi;

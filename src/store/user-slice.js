@@ -72,8 +72,8 @@ export const login = (user) => async dispatch => {
 
     const { data, error } = await dispatch(userApi.endpoints.login.initiate(user));
 
-    if (error){
-      return dispatch(showErrorNotification(error.data.message?? error.data.title));
+    if (error) {
+      return dispatch(showErrorNotification(error.data.message ?? error.data.title));
     }
     dispatch(setCredentials(data));
     dispatch(hideModal({ id: MODALS.AUTHENTICATE }));
@@ -87,12 +87,12 @@ export const register = (user) => async dispatch => {
   try {
     const { data, error } = await dispatch(userApi.endpoints.registration.initiate(user));
 
-    if (error){
-      return dispatch(showErrorNotification(error.data.message?? error.data.title));
+    if (error) {
+      return dispatch(showErrorNotification(error.data.message ?? error.data.title));
     }
-    if (user.icon){
+    if (user.icon) {
       await axios.post(
-        process.env.REACT_APP_API_BASE_URL +`icon/addOrUpdateImage/${data.data.id}`
+        process.env.REACT_APP_API_BASE_URL + `icon/addOrUpdateImage/${data.data.id}`
         , getFormDataIcon(user.icon),
       );
     }
@@ -118,6 +118,46 @@ export const update = (user) => async dispatch => {
 
   }
 
+};
+export const subscribe = (authorId) => async (dispatch, getState) => {
+  const userId = getState().user.user.id;
+
+  try {
+    if (!userId || !authorId) {
+      return dispatch(setError('Unexpected error'));
+    }
+
+    const { data, error } = await dispatch(userApi.endpoints.subscribe.initiate({ userId, authorId }));
+
+    if (error) {
+      return dispatch(showErrorNotification(error.data.message ?? error.data.title));
+    }
+
+
+  } catch (error) {
+    dispatch(setError(error ?? 'Unexpected error'));
+
+  }
+};
+export const isSubscribed = (authorId) => async (dispatch, getState) => {
+  const userId = getState().user.user.id;
+
+  try {
+    if (!userId || !authorId) {
+      return dispatch(setError('Unexpected error'));
+    }
+    const { data, error } = await dispatch(userApi.endpoints.getIsSubscribed.initiate({ userId, authorId }));
+
+    if (error) {
+      return dispatch(showErrorNotification(error.data.message ?? error.data.title));
+    }
+    console.log(data);
+
+    return data;
+  } catch (error) {
+    dispatch(setError(error ?? 'Unexpected error'));
+
+  }
 };
 export const checkToken = () => async (dispatch, getState) => {
   const user = getState().user?.user;
