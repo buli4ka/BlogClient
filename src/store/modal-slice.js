@@ -13,6 +13,7 @@ export const initialState = {
     [MODALS.AUTHENTICATE]: { ...modalItemTemplate },
     [MODALS.REGISTRATION]: { ...modalItemTemplate },
     [MODALS.COMMENT]: { ...modalItemTemplate },
+    [MODALS.POST]: { ...modalItemTemplate },
   },
 };
 

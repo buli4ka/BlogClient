@@ -2,8 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
 
-import { showErrorNotification } from './notification-slice';
 
+import { showErrorNotification } from './notification-slice';
+import { hideModal } from './modal-slice';
+
+import { MODALS } from 'constants/modals';
 import { USER_IMAGE_STORAGE, USER_KEY_STORAGE } from 'constants/storage';
 import { userApi } from 'api/user-api';
 import { getFormDataIcon } from 'utils/getImageBody';
@@ -73,7 +76,7 @@ export const login = (user) => async dispatch => {
       return dispatch(showErrorNotification(error.data.message?? error.data.title));
     }
     dispatch(setCredentials(data));
-
+    dispatch(hideModal({ id: MODALS.AUTHENTICATE }));
   } catch (error) {
     dispatch(setError(error ?? 'Unexpected error'));
 
@@ -94,6 +97,8 @@ export const register = (user) => async dispatch => {
       );
     }
     dispatch(setCredentials(data));
+    dispatch(hideModal({ id: MODALS.AUTHENTICATE }));
+
   } catch (error) {
     dispatch(setError(error ?? 'Unexpected error'));
 

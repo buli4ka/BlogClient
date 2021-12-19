@@ -1,0 +1,41 @@
+.author {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 45%;
+}
+.author:hover{
+    opacity: 30%;
+}
+.author img {
+    width: 50px;
+    border-radius: 50%;
+}
+.author span{
+    font-size: 24px;
+    padding: 1rem;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.gallery {
+    width: 45%;
+}
+
+.info {
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.title {
+    text-align: center;
+    padding: inherit;
+    font-size: 28px;
+}

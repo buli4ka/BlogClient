@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-// import Magnifier from 'react-magnifier';
+import Magnifier from 'react-magnifier';
 import { CarouselProvider,
   Slider,
   Slide,
@@ -72,7 +72,7 @@ export default function Gallery(props) {
           <Images images={images} zoomEnabled={zoomEnabled} />
         </Slider>
       </div>
-      <ZoomButton onClick={toggleZoom} images={images} zoomEnabled={zoomEnabled} zoomable={zoomable} />
+      {/*<ZoomButton onClick={toggleZoom} images={images} zoomEnabled={zoomEnabled} zoomable={zoomable} />*/}
     </CarouselProvider>
   );
 }

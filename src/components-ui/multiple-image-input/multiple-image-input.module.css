@@ -2,6 +2,8 @@
 
 }
 
-.imagesField {
+.imagesField img {
+    width: 25%!important;
+    margin: 5px;
 
 }

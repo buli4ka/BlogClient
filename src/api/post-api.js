@@ -7,6 +7,9 @@ export const postApi = createApi({
     getAllPosts: builder.query({
       query: () => 'post/getAll',
     }),
+    getPostById: builder.query({
+      query: id => `post/getById/${id}`,
+    }),
     createPost: builder.mutation({
       query: post => ({
         url: 'post/CreatePost',
@@ -20,5 +23,6 @@ export const postApi = createApi({
 
 export const {
   useGetAllPostsQuery,
+  useGetPostByIdQuery,
   useCreatePostMutation,
 } = postApi;

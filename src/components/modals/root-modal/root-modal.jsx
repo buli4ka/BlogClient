@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 
 import Modal from '../../modal/modal';
 import AuthModal from '../auth-modal/auth-modal';
+import PostDetailModal from '../post-detail-modal/post-detail-modal';
 
 import { useEventListener } from 'hooks/use-event-listener';
 import { MODALS } from 'constants/modals';
@@ -12,6 +13,7 @@ import { getVisibleModalsSelector, hideModal, hideAllModal } from 'store/modal-s
 
 const ModalContent = {
   [MODALS.AUTHENTICATE]: AuthModal,
+  [MODALS.POST]: PostDetailModal,
 };
 
 const modalRoot = document.createElement('div');

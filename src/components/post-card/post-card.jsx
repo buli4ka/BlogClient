@@ -8,14 +8,18 @@ import { ReactComponent as HeartIcon } from 'assets/icons/heart.svg';
 import { ReactComponent as CommentIcon } from 'assets/icons/comment.svg';
 import { normalizeDate } from 'utils/normalize-date';
 import noImage from 'assets/icons/NoImage34.png';
+import useModal from 'hooks/use-modal';
+import { MODAL_SIZES, MODALS } from 'constants/modals';
 
 const PostCard = ({ post }) => {
-  const dispatch = useDispatch();
+  const [postModal] = useModal(MODALS.POST, {
+    size: MODAL_SIZES.LARGE,
+  });
 
-    // const showPostDetail = ()=> dispatch()
   return (
     <div className={styles.card}>
       <img
+        onClick={()=>postModal({ postId: post.id })}
         className={styles.img}
         src={post.previewImage?? noImage}
         alt="Post"
