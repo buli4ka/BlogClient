@@ -15,7 +15,7 @@ import { userSelector } from 'store/user-slice';
 
 const PostCard = ({ post }) => {
   const currentUser = useSelector(userSelector).user;
-  const [isCurrentUserPost, setIsCurrentUserPost] = useState(currentUser.id === post.authorId);
+  const [isCurrentUserPost, setIsCurrentUserPost] = useState(currentUser?.id === post.authorId);
   const dispatch = useDispatch();
   const [postModal] = useModal(MODALS.POST, {
     size: MODAL_SIZES.LARGE,
@@ -56,7 +56,7 @@ const PostCard = ({ post }) => {
         <div className={styles.quantityButtons}>
           <Button
             renderIcon={() => <HeartIcon />}
-            title={post.quantityOfLikes}
+            title={''+post.quantityOfLikes}
             onClick={addLike}
           />
           {/*<Button*/}

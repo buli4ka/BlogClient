@@ -120,7 +120,7 @@ export const update = (user) => async dispatch => {
 
 };
 export const subscribe = (authorId) => async (dispatch, getState) => {
-  const userId = getState().user.user.id;
+  const userId = getState().user.user?.id;
 
   try {
     if (!userId || !authorId) {
@@ -140,7 +140,7 @@ export const subscribe = (authorId) => async (dispatch, getState) => {
   }
 };
 export const isSubscribed = (authorId) => async (dispatch, getState) => {
-  const userId = getState().user.user.id;
+  const userId = getState().user.user?.id;
 
   try {
     if (!userId || !authorId) {

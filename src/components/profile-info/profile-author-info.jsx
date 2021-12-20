@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from 'components/profile-info/profile-user-info.module.css';
 import UserIconInput from 'components-ui/user-icon-input/user-icon-input';
@@ -8,9 +8,11 @@ import Button from 'components-ui/button/button';
 import { ROUTES } from 'constants/routes';
 import UserInfo from 'components/user-info/user-info';
 import noImage from 'assets/icons/NoImage.png';
-import { isSubscribed, subscribe } from 'store/user-slice';
+import { isSubscribed, subscribe, userSelector } from 'store/user-slice';
 
 const ProfileAuthorInfo = ({ author }) => {
+  const currentUser = useSelector(userSelector).user;
+
   const [isSubscribeTitle, setIsSubscribeTitle] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -52,11 +54,13 @@ const ProfileAuthorInfo = ({ author }) => {
       </div>
       <div>
         <UserInfo user={author} />
-        <Button
-          className={styles.likedPostsButton}
-          title={isSubscribeTitle ? 'Unsubscribe' : 'Subscribe'}
-          onClick={subscribeHandler}
-        />
+        {currentUser && (
+          <Button
+            className={styles.likedPostsButton}
+            title={isSubscribeTitle ? 'Unsubscribe' : 'Subscribe'}
+            onClick={subscribeHandler}
+          />
+        )}
       </div>
     </div>
   );

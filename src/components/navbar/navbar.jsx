@@ -30,6 +30,7 @@ const Navbar = (user) => {
   const logoutHandler = () => {
     dispatch(logout());
     history.push(ROUTES.MAIN);
+    window.location.reload();
 
   };
 
