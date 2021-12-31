@@ -19,15 +19,15 @@ const ProfilePage = () => {
     if (isError) history.replace('/');
   }, [isError, history]);
 
-  if (isFetching)
+  if (isFetching || !isSuccess)
     return <Loader />;
-  if (isSuccess)
-    return (
-      <div>
-        {authorId === user.id || authorId===undefined ? <ProfileUserInfo user={userData} />:<ProfileAuthorInfo author={userData} />}
-        <PostList posts={userData.posts} title="Posts" />
-      </div>
-    );
+
+  return (
+    <div>
+      {authorId === user.id || authorId===undefined ? <ProfileUserInfo user={userData} />:<ProfileAuthorInfo author={userData} />}
+      <PostList posts={userData?.posts} title="Posts" />
+    </div>
+  );
 };
 
 export default ProfilePage;
