@@ -20,6 +20,13 @@ export const postApi = createApi({
         body: post,
       }),
     }),
+    updatePost: builder.mutation({
+      query: post =>({
+        url: 'post/UpdatePost',
+        method: 'PUT',
+        body: post,
+      }),
+    }),
     deletePost: builder.mutation({
       query: ({ postId, authorId }) => ({
         url: `post/DeletePost?postId=${postId}&authorId=${authorId}`,

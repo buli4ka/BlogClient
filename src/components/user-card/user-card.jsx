@@ -10,11 +10,9 @@ import { ROUTES } from 'constants/routes';
 const UserCard = ({ user }) => {
   const history = useHistory();
 
-  console.log(user);
-
   return (
     <div className={styles.author} onClick={()=>history.push(ROUTES.PROFILE+user.id)}>
-      <img src={user.iconUrl ?? noImage} />
+      <img src={user.iconUrl ?? noImage} alt="Icon" />
       <span>
         {user.username}
       </span>

@@ -18,15 +18,20 @@
     width: 100%;
     /*padding: 7%;*/
 }
-
+.subs button{
+    /*margin: 10px;*/
+    background-color: var(--cl-orange);
+    border-radius: 34px;
+}
 .subs button:first-child {
     float: left;
-    margin: 10px;
+
 }
 
 .subs button:last-child {
     float: none;
-    margin: 10px;
+    margin-left: 10px;
+
 }
 
 .userInfo {

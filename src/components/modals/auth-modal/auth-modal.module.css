@@ -28,6 +28,9 @@
     border: none;
     border-radius: 34px;
     padding: 10px;
+    margin: 10px;
+
+
 }
 
 .authSelectors button:hover {
@@ -36,7 +39,5 @@
 }
 
 .authSelectorPressed {
-    border-bottom: var(--cl-orange);
-    background-color: rgba(190, 127, 25, 0.5) !important;
-
+    background-color: var(--cl-orange)!important;
 }

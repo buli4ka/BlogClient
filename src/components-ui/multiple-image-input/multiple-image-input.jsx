@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styles from './multiple-image-input.module.css';
 
-import noImage from 'assets/icons/NoImage.png';
 
-const MultipleImageInput = ({ onChange, disabled }) => {
-  const [preview, setPreview] = useState([]);
+const MultipleImageInput = ({ onChange, imagePreviews }) => {
+  const [preview, setPreview] = useState( []);
   const fileobj= [];
 
+  useEffect(()=>{
+    if (imagePreviews)
+      setPreview(imagePreviews);
+  }, [imagePreviews]);
+
+
   const changedHandler = event => {
+    let newPrevs = [];
+
     let files = event.target.files;
 
     fileobj.push(files);
@@ -18,13 +25,15 @@ const MultipleImageInput = ({ onChange, disabled }) => {
       reader = new FileReader();
       reader.readAsDataURL(fileobj[0][i]);
       reader.onload = event => {
-        preview.push(event.target.result); // update the array instead of replacing the entire value of preview
+        newPrevs.push(event.target.result);
 
-        setPreview([...new Set(preview)]); // spread into a new array to trigger rerender
+        setPreview([...new Set(newPrevs)]); // spread into a new array to trigger rerender
+
       };
     }
     onChange(files);
   };
+
 
   return (
     <div className={styles.inputField}>

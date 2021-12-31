@@ -25,6 +25,9 @@
     --cl-green: #66992a;
     --cl-yellow: #be7f19;
     --cl-orange: #FF9400;
+    --cl-beige: #E4D0B0;
+    --border-width: 0.1em;
+    --animation-speed: 0.5s;
 }
 
 * {
@@ -40,6 +43,8 @@ html {
 }
 
 body {
+    background-color: var(--cl-beige );
+    color: black;
     margin: 0;
     width: 100%;
     min-height: 100vh;

@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from './user-icon-input.module.css';
 
-const UserIconInput = ({ name, value, onChange, accept, image, disabled }) => {
+import noImage from 'assets/icons/NoImage.png';
+
+const UserIconInput = ({ name, value, onChange, accept, disabled, iconPreview }) => {
+  const [preview, setPreview] = useState(iconPreview??noImage);
 
   const filesChangeHandler = event => {
     const reader = new FileReader();
     const file = event.target.files[0];
 
     reader.onloadend = () => {
-      onChange(reader.result, file);
+      setPreview(reader.result);
+      onChange(file);
     };
     reader.readAsDataURL(file);
 
@@ -19,7 +23,7 @@ const UserIconInput = ({ name, value, onChange, accept, image, disabled }) => {
   return (
     <label htmlFor="photo-upload" className={styles.fileUpload}>
       <div className={styles.imgWrap}>
-        <img htmlFor="photo-upload" src={image} />
+        <img src={preview} alt="Icon" />
       </div>
       <input
         id="photo-upload"
