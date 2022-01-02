@@ -13,7 +13,7 @@ const PostDetails = (props) => {
   return (
     <div>
       <div className={styles.author} onClick={()=>history.push(ROUTES.PROFILE+author.id)}>
-        <img src={author.iconUrl ?? noImage} />
+        <img src={author.iconUrl ?? noImage} alt="Icon" />
         <span>
           {author.username}
         </span>
