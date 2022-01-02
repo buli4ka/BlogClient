@@ -10,7 +10,7 @@ export const NOTIFICATIONS = {
   FIRSTNAME_NOT_VALID: '',
   PASSWORD_NOT_VALID: '',
   EMAIL_NOT_VALID: '',
-
+  LOGOUT_USER: 'You were logout, please, log in again',
   RESPONSE_ERROR: 'Something went wrong. Check network connection and try again.',
   NOT_AUTHORIZED: 'You are not logged in, please authorize to continue',
 

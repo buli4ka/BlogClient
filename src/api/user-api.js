@@ -1,8 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { baseQuery } from './base-query';
-
-
 export const userApi = createApi({
   reducerPath: 'userFromApi',
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_BASE_URL }),
@@ -31,8 +28,8 @@ export const userApi = createApi({
     }),
 
     update: builder.mutation({
-      query: userUpdateData => ({
-        url: 'user/update',
+      query: ({ userUpdateData, userId }) => ({
+        url: `user/update/${userId}`,
         method: 'PUT',
         body: userUpdateData,
       }),

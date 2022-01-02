@@ -4,19 +4,20 @@ import styles from './user-icon-input.module.css';
 
 import noImage from 'assets/icons/NoImage.png';
 
-const UserIconInput = ({ name, value, onChange, accept, disabled, iconPreview }) => {
+const UserIconInput = ({ name, value, onChange, accept, iconPreview }) => {
   const [preview, setPreview] = useState(iconPreview??noImage);
 
   const filesChangeHandler = event => {
     const reader = new FileReader();
     const file = event.target.files[0];
 
-    reader.onloadend = () => {
-      setPreview(reader.result);
-      onChange(file);
-    };
     reader.readAsDataURL(file);
+    reader.onload = event => {
+      setPreview(event.target.result);
 
+    };
+
+    onChange(file);
   };
 
 
@@ -32,7 +33,6 @@ const UserIconInput = ({ name, value, onChange, accept, disabled, iconPreview })
         value={value}
         onChange={filesChangeHandler}
         accept={accept}
-        disabled={disabled}
       />
     </label>
   );

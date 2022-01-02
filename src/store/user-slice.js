@@ -2,14 +2,16 @@ import { createSlice } from '@reduxjs/toolkit';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
 
-
-import { showErrorNotification } from './notification-slice';
+import { showErrorNotification, showSuccessNotification } from './notification-slice';
 import { hideModal } from './modal-slice';
 
+import { NOTIFICATIONS } from 'constants/notifications';
+import { isUserUpdatingData } from 'utils/user-validation';
 import { MODALS } from 'constants/modals';
 import { USER_IMAGE_STORAGE, USER_KEY_STORAGE } from 'constants/storage';
 import { userApi } from 'api/user-api';
-import { getFormDataIcon } from 'utils/getImageBody';
+import { getFormDataIcon, uploadIcon } from 'utils/getImageBody';
+import { getUpdateData } from 'utils/user-request';
 
 const SECOND_IN_MILLISECONDS = 1000;
 
@@ -109,10 +111,28 @@ export const logout = () => dispatch => {
   dispatch(removeCredentials());
 };
 
-export const update = (user) => async dispatch => {
-  try {
-    const data = await dispatch(userApi.endpoints.update.initiate(user));
+export const update = (user, userToUpdate, userIcon) => async (dispatch, getState) => {
+  const userId = getState().user.user?.id;
+  const isUpdating = isUserUpdatingData(user, userToUpdate);
 
+  try {
+    if (isUpdating){
+      const { error } = await dispatch(userApi.endpoints.update.initiate({ userUpdateData: getUpdateData(user), userId }));
+
+      if (error) {
+        return dispatch(showErrorNotification(error.data.message ?? error.data.title));
+      }
+    }
+    if (userIcon){
+      await uploadIcon(userIcon, userId);
+    }
+    dispatch(hideModal({ id: MODALS.UPDATE }));
+
+    if (isUpdating){
+      dispatch(removeCredentials());
+
+      return dispatch(showSuccessNotification(NOTIFICATIONS.LOGOUT_USER));
+    }
   } catch (error) {
     dispatch(setError(error ?? 'Unexpected error'));
 
@@ -127,7 +147,7 @@ export const subscribe = (authorId) => async (dispatch, getState) => {
       return dispatch(setError('Unexpected error'));
     }
 
-    const { data, error } = await dispatch(userApi.endpoints.subscribe.initiate({ userId, authorId }));
+    const { error } = await dispatch(userApi.endpoints.subscribe.initiate({ userId, authorId }));
 
     if (error) {
       return dispatch(showErrorNotification(error.data.message ?? error.data.title));
@@ -151,7 +171,6 @@ export const isSubscribed = (authorId) => async (dispatch, getState) => {
     if (error) {
       return dispatch(showErrorNotification(error.data.message ?? error.data.title));
     }
-    console.log(data);
 
     return data;
   } catch (error) {

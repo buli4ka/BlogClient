@@ -13,7 +13,18 @@
     width: 60%;
 }
 
+.imgWrap {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
 
+}
+.imgWrap img{
+    width: auto;
+    height: 100%;
+}
 .subs {
     width: 100%;
     /*padding: 7%;*/

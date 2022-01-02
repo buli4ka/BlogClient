@@ -14,6 +14,18 @@ export const uploadImages = async ( images, id )=>{
   }
 };
 
+export const uploadIcon = async ( icon, id )=>{
+  let fd = new FormData();
+
+  fd.append('File', icon);
+  await axios.post(
+    process.env.REACT_APP_API_BASE_URL + 'icon/AddOrUpdateUserIcon/' + id
+    , fd,
+  );
+
+
+};
+
 export const getFormDataIcon = (image)=>{
   let fd = new FormData();
 
