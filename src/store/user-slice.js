@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import jwt from 'jsonwebtoken';
-import axios from 'axios';
 
 import { showErrorNotification, showSuccessNotification } from './notification-slice';
 import { hideModal } from './modal-slice';
@@ -10,7 +9,7 @@ import { isUserUpdatingData } from 'utils/user-validation';
 import { MODALS } from 'constants/modals';
 import { USER_IMAGE_STORAGE, USER_KEY_STORAGE } from 'constants/storage';
 import { userApi } from 'api/user-api';
-import { getFormDataIcon, uploadIcon } from 'utils/getImageBody';
+import { uploadIcon } from 'utils/getImageBody';
 import { getUpdateData } from 'utils/user-request';
 
 const SECOND_IN_MILLISECONDS = 1000;
@@ -85,18 +84,15 @@ export const login = (user) => async dispatch => {
   }
 };
 
-export const register = (user) => async dispatch => {
+export const register = (user, userIcon) => async dispatch => {
   try {
     const { data, error } = await dispatch(userApi.endpoints.registration.initiate(user));
 
     if (error) {
       return dispatch(showErrorNotification(error.data.message ?? error.data.title));
     }
-    if (user.icon) {
-      await axios.post(
-        process.env.REACT_APP_API_BASE_URL + `icon/addOrUpdateImage/${data.data.id}`
-        , getFormDataIcon(user.icon),
-      );
+    if (userIcon){
+      await uploadIcon(userIcon, data.id);
     }
     dispatch(setCredentials(data));
     dispatch(hideModal({ id: MODALS.AUTHENTICATE }));

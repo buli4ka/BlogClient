@@ -28,12 +28,10 @@ const PostCard = ({ post }) => {
 
   const addLike = async ()=>{
     await dispatch(addLikeToPost(post.id));
-    window.location.reload();
   };
 
   const removePost = async ()=>{
     await dispatch(deletePost(post.id));
-    window.location.reload();
   };
 
   const editPost = () => {

@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const userApi = createApi({
   reducerPath: 'userFromApi',
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_BASE_URL }),
+  tagTypes: ['User'],
   endpoints: (builder) => ({
     registration: builder.mutation({
       query: userRegistrationData => ({
@@ -25,6 +26,7 @@ export const userApi = createApi({
         method: 'POST',
         body: userSubscribeData,
       }),
+      invalidatesTags: ['User'],
     }),
 
     update: builder.mutation({
@@ -45,10 +47,14 @@ export const userApi = createApi({
 
     getUserById: builder.query({
       query: id => `user/getById/${id}`,
+      providesTags: ['User'],
+
     }),
 
     getAuthorById: builder.query({
       query: id => `user/getAuthorById/${id}`,
+      providesTags: ['User'],
+
     }),
 
     getSubscribers: builder.query({
@@ -59,6 +65,7 @@ export const userApi = createApi({
     }),
     getIsSubscribed: builder.query({
       query: ({ userId, authorId }) => `user/isUserSubscribed?userId=${userId}&authorId=${authorId}`,
+      providesTags: ['User'],
     }),
 
   }),

@@ -1,0 +1,21 @@
+.profileInfo {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+}
+
+.userInfo {
+    padding: 2vw;
+}
+
+.userInfo span {
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+.likedPostsButton{
+    float: right;
+    background-color: var(--cl-orange);
+    border-radius: 34px;
+}

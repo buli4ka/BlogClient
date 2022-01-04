@@ -1,0 +1,37 @@
+
+.avatarInfo {
+    margin: 2vh 2vw;
+    padding: 2vh 2vw;
+    width: 60%;
+}
+
+.imgWrap {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+
+}
+.imgWrap img{
+    width: auto;
+    height: 100%;
+}
+.subs {
+    width: 100%;
+}
+.subs button{
+    margin-top: 10px;
+    padding-right: 5px;
+    background-color: var(--cl-orange);
+    border-radius: 34px;
+}
+.subs button:first-child {
+    float: left;
+
+}
+
+.subs button:last-child {
+    float: none;
+    margin-left: 10px;
+}

@@ -1,11 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import UserInfo from '../user-info/user-info';
-
 import styles from './profile-user-info.module.css';
 
-import noImage from 'assets/icons/NoImage.png';
+import UserInfo from 'components/user-info/user-info';
+import ProfileImage from 'components/profile-image/profile-image';
 import Button from 'components-ui/button/button';
 import { ROUTES } from 'constants/routes';
 import useModal from 'hooks/use-modal';
@@ -23,15 +22,12 @@ const ProfileUserInfo = ({ user }) => {
 
   return (
     <div className={styles.profileInfo}>
-      <div className={styles.avatarInfo}>
-        <div className={styles.imgWrap}>
-          <img src={user?.iconUrl ?? noImage} alt="Icon" />
-        </div>
-        <div className={styles.subs}>
-          <Button onClick={() => history.push(ROUTES.SUBS+user.id)} title={`Subscribers ${user.quantityOfSubscribers}`} />
-          <Button onClick={() => history.push(ROUTES.SUBSD+user.id)} title={`Subscribed ${user.quantityOfSubscribed}`} />
-        </div>
-      </div>
+      <ProfileImage
+        id={user.id}
+        icon={user.iconUrl}
+        quantityOfSubscribers={user.quantityOfSubscribers}
+        quantityOfSubscribed={user.quantityOfSubscribed}
+      />
       <div>
         <UserInfo user={user} />
         <Button

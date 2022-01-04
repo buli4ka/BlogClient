@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 
 import { login, register } from '../../../../store/user-slice';
 import Textarea from '../../../../components-ui/textarea/textarea';
+import UserIconInput from '../../../../components-ui/user-icon-input/user-icon-input';
+import Checkbox from '../../../../components-ui/checkbox/checkbox';
 
 import styles from './auth-condition-form.module.css';
 
@@ -12,8 +14,14 @@ import Button from 'components-ui/button/button';
 
 const AuthConditionForm = ({ condition }) => {
   const [user, setUser] = useState({});
+  const [userIcon, setUserIcon] = useState();
   const dispatch = useDispatch();
+
   const handleChange = ({ target: { value, name } }) => setUser({ ...user, [name]: value });
+
+  const changeIcon = (icon) => {
+    setUserIcon(icon);
+  };
 
   const validationHandler = async e => {
     e.preventDefault();
@@ -21,7 +29,7 @@ const AuthConditionForm = ({ condition }) => {
       ?
       await dispatch(login(user))
       :
-      await dispatch(register(user));
+      await dispatch(register(user, userIcon));
   };
 
   const Login = (
@@ -42,6 +50,14 @@ const AuthConditionForm = ({ condition }) => {
   );
   const Register = (
     <>
+      <div className={styles.userIcon}>
+        <UserIconInput
+          iconPreview={user.iconUrl}
+          onChange={changeIcon}
+          name="image"
+          accept="image/jpeg,image/png,image/jpg, image/gif"
+        />
+      </div>
       <Input
         className={styles.userInput} name="firstName"
         value={user.firstName}
@@ -67,11 +83,16 @@ const AuthConditionForm = ({ condition }) => {
         placeholder="Biography"
       />
       {Login}
+      <Checkbox
+        name="isPrivate"
+        onChange={handleChange}
+        text="Is private account"
+        value={user.isPrivate}
+      />
     </>
   );
 
   return (
-
     <form className={styles.form} onSubmit={validationHandler}>
       {condition ? Login : Register}
       <Button className={styles.submitButton} title="Submit" type="submit" />
