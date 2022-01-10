@@ -111,6 +111,7 @@ export const update = (user, userToUpdate, userIcon) => async (dispatch, getStat
   const userId = getState().user.user?.id;
   const isUpdating = isUserUpdatingData(user, userToUpdate);
 
+  console.log(user, userToUpdate, userIcon, isUpdating);
   try {
     if (isUpdating){
       const { error } = await dispatch(userApi.endpoints.update.initiate({ userUpdateData: getUpdateData(user), userId }));
@@ -119,6 +120,7 @@ export const update = (user, userToUpdate, userIcon) => async (dispatch, getStat
         return dispatch(showErrorNotification(error.data.message ?? error.data.title));
       }
     }
+
     if (userIcon){
       await uploadIcon(userIcon, userId);
     }

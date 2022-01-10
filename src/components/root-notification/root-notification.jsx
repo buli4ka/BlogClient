@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import ReactDOM from 'react-dom';
 
 import styles from './root-notification.module.css';
-import Icon from './components/icon/icon';
 
 import LayoutContainer from 'components/layout-container/layout-container';
 import { getNotificationSelector } from 'store/notification-slice';
@@ -36,9 +35,6 @@ const RootNotification = ({ testId = 'root-notification' }) => {
     >
       <LayoutContainer>
         <div className={styles.info} data-testid="notificationBanner">
-          {/*<span>*/}
-          {/*  <Icon type={type} />*/}
-          {/*</span>*/}
           <h2 className={styles.message}>{message}</h2>
         </div>
       </LayoutContainer>

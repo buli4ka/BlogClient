@@ -1,0 +1,28 @@
+.form {
+    --gap: 30%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.form .userInput {
+    font-size: 1.2rem;
+}
+
+.form .submitButton {
+    /*margin: var(--gap) 0 0 var(--gap);*/
+    align-self: end;
+    text-align: center;
+    padding: 1em 1.5em;
+    border-radius: 34px;
+    background-color: var(--cl-orange);
+    max-height: 100px;
+    max-width: 150px;
+}
+.userIcon{
+    text-align: center;
+    padding: 10px;
+}

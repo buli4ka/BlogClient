@@ -39,3 +39,12 @@
     padding: inherit;
     font-size: 28px;
 }
+
+.date{
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+}
+.date span{
+    color: #66992a;
+}

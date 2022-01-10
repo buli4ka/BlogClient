@@ -7,19 +7,24 @@ const UserInfo = ({ user }) => {
 
   return (
     <div className={styles.userInfo}>
-      <span>
-        {`Firstname - ${user.firstName}`}
-      </span>
-      <span>
-        {`Lastname - ${user.lastName}`}
-      </span>
-      <span>
-        {`Username - ${user.username}`}
-      </span>
+      <div>
+        <span className={styles.key}>Firstname - </span>
+        <span className={styles.value}>{user.firstName}</span>
+      </div>
 
-      <span>
-        {`Biography - ${user.biography}`}
-      </span>
+      <div>
+        <span className={styles.key}>Lastname - </span>
+        <span className={styles.value}>{user.lastName}</span>
+      </div>
+      <div>
+        <span className={styles.key}>Username - </span>
+        <span className={styles.value}>{user.username}</span>
+      </div>
+
+      <div className={styles.biography}>
+        <span className={styles.key}>Biography - </span>
+        <span className={styles.value}>{user.biography}</span>
+      </div>
 
 
     </div>

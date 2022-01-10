@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import SubscribersPage from './pages/subscribers-page/subscribers-page';
+import AuthPage from './pages/auth-page/auth-page';
 
 import LikedPosts from 'pages/liked-posts/liked-posts';
 import CreatePostPage from 'pages/create-post-page/create-post-page';
@@ -14,7 +15,7 @@ import RootModal from 'components/modals/root-modal/root-modal';
 import RootNotification from 'components/root-notification/root-notification';
 import SubscribedPage from 'pages/subscribed-page/subscribed-page';
 
-export default function Router({ user, error, theme }) {
+export default function Router({ user, theme }) {
   const ProtectedRoutes = (
     <Switch>
       <Route from={ROUTES.MAIN} exact component={MainPage} />
@@ -33,6 +34,8 @@ export default function Router({ user, error, theme }) {
   const AuthorizationRoutes = (
     <Switch>
       <Route from={ROUTES.MAIN} exact component={MainPage} />
+      <Route from={ROUTES.AUTH} exact component={AuthPage} />
+
       <Route from={ROUTES.PROFILE + ':id'} exact component={ProfilePage} />
       <Route from={ROUTES.SUBS + ':id'} exact component={SubscribersPage} />
       <Route from={ROUTES.SUBSD + ':id'} exact component={SubscribedPage} />
@@ -47,7 +50,7 @@ export default function Router({ user, error, theme }) {
         <Navbar user={user} />
         <LayoutContainer theme={theme}>
           {user ? ProtectedRoutes : AuthorizationRoutes}
-          <RootModal />
+          <RootModal theme={theme} />
         </LayoutContainer>
       </BrowserRouter>
       <RootNotification />

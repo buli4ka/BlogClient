@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 import styles from './multiple-image-input.module.css';
 
+import noImage from 'assets/icons/NoImage.png';
+
 
 const MultipleImageInput = ({ onChange, imagePreviews }) => {
-  const [preview, setPreview] = useState( []);
+  const [preview, setPreview] = useState( [noImage]);
   const fileobj= [];
 
   useEffect(()=>{

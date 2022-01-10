@@ -1,9 +1,18 @@
 .userInfo {
     padding: 2vw;
+
 }
 
 .userInfo span {
-    display: flex;
-    text-align: center;
-    align-items: center;
+    padding: 10px;
+    font-size: 24px;
+}
+
+.key {
+    font-weight: bold;
+}
+
+.biography span {
+    margin-top:1rem;
+    font-size: 16px;
 }

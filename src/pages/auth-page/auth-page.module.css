@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 1000px;
+    flex-basis: max-content;
+
+}
+
+.header {
+    text-align: center;
+    margin: 2rem;
+    border-radius: 34px;
+    padding: 0 2rem;
+}
+
+.header:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.5);
+
+}
+
+.components {
+
+}

@@ -12,9 +12,9 @@ export const isName = value => NAME_REG_EXP.test(value);
 export const isBiography = value => BIOGRAPHY_REG_EXP.test(value);
 
 export const isUserUpdatingData = (user, userToUpdate)=>{
-  if (user.firstname !== userToUpdate.firstname)
+  if (user.firstName !== userToUpdate.firstName)
     return true;
-  if (user.lastname !== userToUpdate.lastname)
+  if (user.lastName !== userToUpdate.lastName)
     return true;
   if (user.email !== userToUpdate.email)
     return true;

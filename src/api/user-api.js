@@ -35,6 +35,8 @@ export const userApi = createApi({
         method: 'PUT',
         body: userUpdateData,
       }),
+      invalidatesTags: ['User'],
+
     }),
 
     delete: builder.mutation({
@@ -43,6 +45,8 @@ export const userApi = createApi({
         method: 'DELETE',
         body: id,
       }),
+      invalidatesTags: ['User'],
+
     }),
 
     getUserById: builder.query({

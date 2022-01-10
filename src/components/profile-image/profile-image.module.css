@@ -13,19 +13,26 @@
     border-radius: 50%;
 
 }
-.imgWrap img{
+
+.imgWrap img {
     width: auto;
     height: 100%;
 }
+
 .subs {
-    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
 }
-.subs button{
+
+.subs button {
     margin-top: 10px;
-    padding-right: 5px;
+    padding: 5px;
     background-color: var(--cl-orange);
     border-radius: 34px;
 }
+
 .subs button:first-child {
     float: left;
 

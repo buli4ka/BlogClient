@@ -1,54 +1,41 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import styles from './auth-condition-form.module.css';
+import styles from './registration.module.css';
 
-import { login, register } from 'store/user-slice';
-import Textarea from 'components-ui/textarea/textarea';
 import UserIconInput from 'components-ui/user-icon-input/user-icon-input';
+import Textarea from 'components-ui/textarea/textarea';
 import Checkbox from 'components-ui/checkbox/checkbox';
+import { register } from 'store/user-slice';
+import { ROUTES } from 'constants/routes';
 import Input from 'components-ui/input/input';
 import Button from 'components-ui/button/button';
 
-
-const AuthConditionForm = ({ condition }) => {
+const Registration = () => {
   const [user, setUser] = useState({});
   const [userIcon, setUserIcon] = useState();
-  const dispatch = useDispatch();
 
-  const handleChange = ({ target: { value, name } }) => setUser({ ...user, [name]: value });
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const changeIcon = (icon) => {
     setUserIcon(icon);
   };
+  const handleChange = ({ target: { value, name } }) => setUser({ ...user, [name]: value });
 
   const validationHandler = async e => {
     e.preventDefault();
-    condition
-      ?
-      await dispatch(login(user))
-      :
-      await dispatch(register(user, userIcon));
+
+    let result = await dispatch(register(user, userIcon));
+
+    if (result)
+      return;
+    history.push(ROUTES.MAIN);
   };
 
-  const Login = (
-    <>
-      <Input
-        className={styles.userInput} name="username"
-        value={user.username}
-        onChange={handleChange}
-        type="text" placeholder="Username"
-      />
-      <Input
-        className={styles.userInput} name="hashedPassword"
-        value={user.hashedPassword}
-        onChange={handleChange}
-        type="password" placeholder="Password"
-      />
-    </>
-  );
-  const Register = (
-    <>
+  return (
+    <form className={styles.form} onSubmit={validationHandler}>
       <div className={styles.userIcon}>
         <UserIconInput
           iconPreview={user.iconUrl}
@@ -81,22 +68,28 @@ const AuthConditionForm = ({ condition }) => {
         onChange={handleChange}
         placeholder="Biography"
       />
-      {Login}
+      <Input
+        className={styles.userInput} name="username"
+        value={user.username}
+        onChange={handleChange}
+        type="text" placeholder="Username"
+      />
+      <Input
+        className={styles.userInput} name="hashedPassword"
+        value={user.hashedPassword}
+        onChange={handleChange}
+        type="password" placeholder="Password"
+      />
       <Checkbox
         name="isPrivate"
         onChange={handleChange}
         text="Is private account"
         value={user.isPrivate}
       />
-    </>
-  );
-
-  return (
-    <form className={styles.form} onSubmit={validationHandler}>
-      {condition ? Login : Register}
       <Button className={styles.submitButton} title="Submit" type="submit" />
+
     </form>
   );
 };
 
-export default AuthConditionForm;
+export default Registration;

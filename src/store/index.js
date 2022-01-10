@@ -27,6 +27,7 @@ const store = configureStore({
   middleware: getDefaultMiddleware => [...getDefaultMiddleware()
     , userApi.middleware
     , postApi.middleware
+    ,
   ],
 });
 

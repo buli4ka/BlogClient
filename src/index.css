@@ -15,6 +15,7 @@
 
 :root {
     /* colors variables */
+    --cl-dark:#19181f;
     --cl-white: #fff;
     --cl-black: #333;
     --cl-gray: #919191;
