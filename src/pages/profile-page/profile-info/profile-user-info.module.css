@@ -1,6 +1,7 @@
 .profileInfo {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     width: 80%;
 }
 
@@ -8,14 +9,9 @@
     padding: 2vw;
 }
 
-.userInfo span {
-    display: flex;
-    text-align: center;
-    align-items: center;
-}
-
 .likedPostsButton{
     float: right;
+    margin: 10px;
     background-color: var(--cl-orange);
     border-radius: 34px;
 }
