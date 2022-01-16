@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './post-details.module.css';
 
@@ -12,14 +12,25 @@ import Button from 'components-ui/button/button';
 import { ReactComponent as HeartIcon } from 'assets/icons/heart.svg';
 import { addLikeToPost } from 'store/post-slice';
 import Slideshow from 'components-ui/slideshow/slideshow';
+import { ReactComponent as HeartRedIcon } from 'assets/icons/heart-red.svg';
+import { userSelector } from 'store/user-slice';
 
 const PostDetails = (props) => {
   const { id, author, createdAt, postComments, postLikes, text, title, updatedAt, imageUrls } = props.post;
   const history = useHistory();
   const dispatch = useDispatch();
+  const currentUser = useSelector(userSelector).user;
 
   const addLike = async ()=>{
     await dispatch(addLikeToPost(id));
+  };
+  const renderIcon = ()=>{
+    for (let i in postLikes){
+      if (postLikes[i].userId=== currentUser?.id)
+        return <HeartRedIcon />;
+    }
+
+    return <HeartIcon />;
   };
 
   return (
@@ -43,7 +54,7 @@ const PostDetails = (props) => {
               {text}
             </span>
             <Button
-              renderIcon={() => <HeartIcon />}
+              renderIcon={renderIcon}
               title={''+postLikes.length}
               onClick={addLike}
             />
@@ -57,7 +68,7 @@ const PostDetails = (props) => {
             </div>
           </div>
         </div>
-        <CommentList comments={postComments} postId={id} />
+        <CommentList comments={postComments} postId={id} user={currentUser} />
       </div>
     </div>
   );

@@ -2,12 +2,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { ROUTES } from '../../constants/routes';
-
 import styles from './post-card.module.css';
 
+import { ROUTES } from 'constants/routes';
 import Button from 'components-ui/button/button';
 import { ReactComponent as HeartIcon } from 'assets/icons/heart.svg';
+import { ReactComponent as HeartRedIcon } from 'assets/icons/heart-red.svg';
 import { ReactComponent as ClosedBinIcon } from 'assets/icons/closed-bin.svg';
 import { ReactComponent as EditIcon } from 'assets/icons/edit.svg';
 import { normalizeDate } from 'utils/normalize-date';
@@ -18,6 +18,7 @@ import { addLikeToPost, deletePost } from 'store/post-slice';
 import { userSelector } from 'store/user-slice';
 
 const PostCard = ({ post }) => {
+  const { id, previewImage, authorId, text, title, createdAt, postLikes } = post;
   const currentUser = useSelector(userSelector).user;
   const dispatch = useDispatch();
   const history = useHistory();
@@ -27,27 +28,35 @@ const PostCard = ({ post }) => {
   });
 
   const addLike = async ()=>{
-    await dispatch(addLikeToPost(post.id));
+    await dispatch(addLikeToPost(id));
   };
 
   const removePost = async ()=>{
-    await dispatch(deletePost(post.id));
+    await dispatch(deletePost(id));
   };
 
   const editPost = () => {
-    history.push(ROUTES.CREATE_POST, { postId: post?.id });
+    history.push(ROUTES.CREATE_POST, { postId: id });
+  };
+  const renderIcon = ()=>{
+    for (let i in postLikes){
+      if (postLikes[i].userId=== currentUser?.id)
+        return <HeartRedIcon />;
+    }
+
+    return <HeartIcon />;
   };
 
   return (
     <div className={styles.card}>
 
       <img
-        onClick={()=>postModal({ postId: post.id })}
+        onClick={()=>postModal({ postId: id })}
         className={styles.img}
-        src={post.previewImage?? noImage}
+        src={previewImage?? noImage}
         alt="Post"
       />
-      {(currentUser?.id === post.authorId) && (
+      {(currentUser?.id === authorId) && (
         <>
           <Button
             className={styles.bin}
@@ -63,13 +72,13 @@ const PostCard = ({ post }) => {
       )}
       <div className={styles.container}>
         <h4>
-          <b>{post.title}</b>
+          <b>{title}</b>
         </h4>
-        <p className={styles.text}>{post.text}</p>
+        <p className={styles.text}>{text}</p>
         <div className={styles.quantityButtons}>
           <Button
-            renderIcon={() => <HeartIcon />}
-            title={''+post.quantityOfLikes}
+            renderIcon={renderIcon}
+            title={''+postLikes.length}
             onClick={addLike}
           />
           {/*<Button*/}
@@ -77,7 +86,7 @@ const PostCard = ({ post }) => {
           {/*  title={''+post.quantityOfComments}*/}
           {/*/>*/}
         </div>
-        <span className={styles.createdSpan}>{normalizeDate(post.createdAt)}</span>
+        <span className={styles.createdSpan}>{normalizeDate(createdAt)}</span>
 
       </div>
     </div>
