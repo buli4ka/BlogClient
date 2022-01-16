@@ -10,12 +10,13 @@ const PostDetailModal = ({ postId }) => {
   const {
     data: post,
     isLoading,
+    isSuccess,
   } = useGetPostByIdQuery(postId);
 
   return (
     <div className={styles.container}>
       {isLoading && <Loader />}
-      {!isLoading && (
+      {(!isLoading &&isSuccess)&& (
         <PostDetails post={post} />)}
     </div>
   );

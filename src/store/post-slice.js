@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { uploadImages } from '../utils/getImageBody';
-import { NOTIFICATIONS } from '../constants/notifications';
-
 import { showErrorNotification } from './notification-slice';
 
+import { uploadImages } from 'utils/getImageBody';
+import { NOTIFICATIONS } from 'constants/notifications';
 import { postApi } from 'api/post-api';
 
 export const initialState = {
@@ -26,8 +25,6 @@ const slice = createSlice({
     addPost: (state, { payload }) => {
       state.posts.push(payload);
     },
-
-
   },
 });
 
@@ -106,6 +103,45 @@ export const addLikeToPost =(postId)=>async (dispatch, getState)=>{
     dispatch(showErrorNotification(error ?? 'Unexpected error'));
 
   }
+};
 
+export const addCommentToPost =({ postId, text, mainCommentId }, isUpdate)=>async (dispatch, getState)=>{
+  const userId = getState().user.user?.id;
+  const request = isUpdate ? { text, userId, postId, id: mainCommentId } : { text, userId, postId, mainCommentId };
 
+  try {
+    if (!userId){
+      return dispatch(showErrorNotification(NOTIFICATIONS.NOT_AUTHORIZED));
+    }
+    if (!text){
+      return dispatch(showErrorNotification(NOTIFICATIONS.NO_TEXT));
+    }
+    const { error } = await dispatch(postApi.endpoints.createUpdatePostComment.initiate(request));
+
+    if (error) {
+      return dispatch(showErrorNotification(error.data.message ?? error.data.title));
+    }
+  } catch (error){
+    dispatch(showErrorNotification(error ?? 'Unexpected error'));
+
+  }
+};
+
+export const deletePostComment = (commentId)=>async (dispatch, getState)=>{
+  const userId = getState().user.user?.id;
+
+  try {
+    if (!userId){
+      return dispatch(showErrorNotification(NOTIFICATIONS.NOT_AUTHORIZED));
+    }
+    const { error } = await dispatch(postApi.endpoints.deletePostComment.initiate(commentId));
+
+    console.log(error);
+    if (error?.data) {
+      return dispatch(showErrorNotification(error.data.message ?? error.data.title));
+    }
+  } catch (error){
+    dispatch(showErrorNotification(error ?? 'Unexpected error'));
+
+  }
 };

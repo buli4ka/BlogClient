@@ -50,7 +50,7 @@ module.exports = {
             'always',
             {
                 except: ['blockless-after-same-name-blockless', 'first-nested'],
-                ignore: ['after-comment'],
+                ignore: ['after-comment-list.jsx'],
             },
         ],
         'at-rule-name-case': 'lower',
@@ -77,7 +77,7 @@ module.exports = {
             'always',
             {
                 except: ['after-custom-property', 'first-nested'],
-                ignore: ['after-comment', 'inside-single-line-block'],
+                ignore: ['after-comment-list.jsx', 'inside-single-line-block'],
             },
         ],
         'declaration-bang-space-after': 'never',
@@ -94,7 +94,7 @@ module.exports = {
             'always',
             {
                 except: ['after-declaration', 'first-nested'],
-                ignore: ['after-comment', 'inside-single-line-block'],
+                ignore: ['after-comment-list.jsx', 'inside-single-line-block'],
             },
         ],
         'function-comma-newline-after': 'always-multi-line',
@@ -126,7 +126,7 @@ module.exports = {
             'always-multi-line',
             {
                 except: ['first-nested'],
-                ignore: ['after-comment'],
+                ignore: ['after-comment-list.jsx'],
             },
         ],
         'selector-attribute-brackets-space-inside': 'never',

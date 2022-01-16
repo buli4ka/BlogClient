@@ -91,7 +91,7 @@ export const register = (user, userIcon) => async dispatch => {
     if (error) {
       return dispatch(showErrorNotification(error.data.message ?? error.data.title));
     }
-    if (userIcon){
+    if (userIcon) {
       await uploadIcon(userIcon, data.id);
     }
     dispatch(setCredentials(data));
@@ -111,22 +111,24 @@ export const update = (user, userToUpdate, userIcon) => async (dispatch, getStat
   const userId = getState().user.user?.id;
   const isUpdating = isUserUpdatingData(user, userToUpdate);
 
-  console.log(user, userToUpdate, userIcon, isUpdating);
   try {
-    if (isUpdating){
-      const { error } = await dispatch(userApi.endpoints.update.initiate({ userUpdateData: getUpdateData(user), userId }));
+    if (isUpdating) {
+      const { error } = await dispatch(userApi.endpoints.update.initiate({
+        userUpdateData: getUpdateData(user),
+        userId,
+      }));
 
       if (error) {
         return dispatch(showErrorNotification(error.data.message ?? error.data.title));
       }
     }
 
-    if (userIcon){
+    if (userIcon) {
       await uploadIcon(userIcon, userId);
     }
     dispatch(hideModal({ id: MODALS.UPDATE }));
 
-    if (isUpdating){
+    if (isUpdating) {
       dispatch(removeCredentials());
 
       return dispatch(showSuccessNotification(NOTIFICATIONS.LOGOUT_USER));
@@ -137,6 +139,7 @@ export const update = (user, userToUpdate, userIcon) => async (dispatch, getStat
   }
 
 };
+
 export const subscribe = (authorId) => async (dispatch, getState) => {
   const userId = getState().user.user?.id;
 
@@ -157,6 +160,7 @@ export const subscribe = (authorId) => async (dispatch, getState) => {
 
   }
 };
+
 export const isSubscribed = (authorId) => async (dispatch, getState) => {
   const userId = getState().user.user?.id;
 
@@ -176,16 +180,18 @@ export const isSubscribed = (authorId) => async (dispatch, getState) => {
 
   }
 };
+
 export const checkToken = () => async (dispatch, getState) => {
   const user = getState().user?.user;
 
     // Token is expired, trying to refresh
   if (user && user.exp && Date.now() >= user.exp * SECOND_IN_MILLISECONDS) {
-    dispatch(setTokenRenewingState(true));
-    const tokensRequest = await dispatch(userApi.endpoints.login.initiate(user));
 
-    if (tokensRequest.data) {
-      dispatch(setCredentials(tokensRequest.data));
+    dispatch(setTokenRenewingState(true));
+    const { data, error } = await dispatch(userApi.endpoints.login.initiate(user));
+
+    if (data) {
+      dispatch(setCredentials(data));
     } else {
       dispatch(removeCredentials());
     }

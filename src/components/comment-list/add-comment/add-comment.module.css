@@ -1,0 +1,15 @@
+.userInput {
+    display: flex;
+    align-items: center;
+}
+
+.userInput input {
+    width: 100%;
+
+}
+
+.userInput button {
+    background-color: var(--cl-orange);
+    border-radius: 34px;
+
+}

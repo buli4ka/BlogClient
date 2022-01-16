@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import styles from './post-details.module.css';
 
+import CommentList from 'components/comment-list/comment-list';
 import noImage from 'assets/icons/NoImage.png';
-import Gallery from 'components-ui/gallery/gallery';
 import { ROUTES } from 'constants/routes';
 import { normalizeDate } from 'utils/normalize-date';
 import Button from 'components-ui/button/button';
@@ -31,12 +31,13 @@ const PostDetails = (props) => {
         </span>
       </div>
       <div className={styles.container}>
+        <span className={styles.title}>{title}</span>
+
         <div className={styles.gallery}>
           <Slideshow images={imageUrls} />
         </div>
         <div className={styles.info}>
 
-          <span className={styles.title}>{title}</span>
           <div>
             <span>
               {text}
@@ -56,6 +57,7 @@ const PostDetails = (props) => {
             </div>
           </div>
         </div>
+        <CommentList comments={postComments} postId={id} />
       </div>
     </div>
   );

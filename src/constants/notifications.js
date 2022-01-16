@@ -13,6 +13,7 @@ export const NOTIFICATIONS = {
   LOGOUT_USER: 'You were logout, please, log in again',
   RESPONSE_ERROR: 'Something went wrong. Check network connection and try again.',
   NOT_AUTHORIZED: 'You are not logged in, please authorize to continue',
+  NO_TEXT: 'Input should not be empty',
 
 
 };

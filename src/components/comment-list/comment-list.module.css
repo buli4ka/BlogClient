@@ -1,0 +1,19 @@
+.container {
+    width: 50%;
+    /*float: left;*/
+}
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.header:hover{
+    opacity: 30%;
+}
+
+.header svg{
+    /*width: 16px;*/
+    margin: 0;
+}
+

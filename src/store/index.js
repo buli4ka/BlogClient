@@ -20,6 +20,7 @@ export const reducer = combineReducers({
   [userApi.reducerPath]: userApi.reducer,
   [postApi.reducerPath]: postApi.reducer,
 
+
 });
 
 const store = configureStore({
