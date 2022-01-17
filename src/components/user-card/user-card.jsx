@@ -11,11 +11,15 @@ const UserCard = ({ user }) => {
   const history = useHistory();
 
   return (
-    <div className={styles.author} onClick={()=>history.push(ROUTES.PROFILE+user.id)}>
-      <img src={user.iconUrl ?? noImage} alt="Icon" />
-      <span>
-        {user.username}
-      </span>
+    <div className={styles.userInfo} onClick={()=>history.push(ROUTES.PROFILE+user.id)}>
+      <div className={styles.userIcon}>
+        <img src={user.iconUrl ?? noImage} alt="Icon" />
+      </div>
+      <div className={styles.username}>
+        <span>
+          {user.username}
+        </span>
+      </div>
     </div>
   );
 };

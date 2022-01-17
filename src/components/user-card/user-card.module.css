@@ -1,20 +1,21 @@
 .userInfo {
-    padding: 2vw;
-    /*border: var(--cl-gray-light) 1px solid;*/
-    margin: 10px;
-    width: 100%;
-
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 34px;
+    padding: 1rem;
+    margin: 1rem;
+}
+.userInfo:hover{
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.userInfo span {
-    font-size: 24px;
+.userIcon img{
+    height: 60px;
+    border-radius: 50%;
 }
 
-.key {
-    font-weight: bold;
-}
-
-.biography span {
-    margin-top: 1rem;
-    font-size: 16px;
+.username{
+    font-size: 48px;
+    padding-left: 2rem;
 }
