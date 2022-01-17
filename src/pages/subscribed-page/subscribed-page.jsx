@@ -16,7 +16,7 @@ const SubscribedPage = () => {
   useEffect(() => {
     if (isError) {
       dispatch(showErrorNotification(error.data.message));
-      history.replace('/');
+      history.goBack();
     }
 
   }, [isError, history, dispatch, error?.data?.message]);
