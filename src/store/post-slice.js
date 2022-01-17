@@ -35,6 +35,7 @@ export const selectedPostSelector = state => state.selectedPost;
 
 export const createPost = (post, images) => async (dispatch, getState) => {
   const authorId = getState().user.user.id;
+  const jwtToken = getState().user.user?.accessToken;
   const request = { ...post, authorId };
 
   try {
@@ -44,7 +45,7 @@ export const createPost = (post, images) => async (dispatch, getState) => {
       return dispatch(showErrorNotification(error.data?.message ?? error.data.title));
     }
     if (images){
-      await uploadImages(images, data.id);
+      await uploadImages(images, data.id, jwtToken);
     }
   } catch (error) {
     dispatch(showErrorNotification(error ?? 'Unexpected error'));
@@ -54,6 +55,7 @@ export const createPost = (post, images) => async (dispatch, getState) => {
 
 export const updatePost = (post, images) => async (dispatch, getState) => {
   const authorId = getState().user.user.id;
+  const jwtToken = getState().user.user?.accessToken;
   const request = { ...post, authorId };
 
   try {
@@ -61,7 +63,7 @@ export const updatePost = (post, images) => async (dispatch, getState) => {
 
     if (images){
 
-      await uploadImages(images, post.id);
+      await uploadImages(images, post.id, jwtToken);
     }
   } catch (error) {
     dispatch(showErrorNotification(error ?? 'Unexpected error'));

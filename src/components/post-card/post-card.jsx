@@ -17,7 +17,7 @@ import { MODAL_SIZES, MODALS } from 'constants/modals';
 import { addLikeToPost, deletePost } from 'store/post-slice';
 import { userSelector } from 'store/user-slice';
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, isReload }) => {
   const { id, previewImage, authorId, text, title, createdAt, postLikes } = post;
   const currentUser = useSelector(userSelector).user;
   const dispatch = useDispatch();
@@ -29,6 +29,9 @@ const PostCard = ({ post }) => {
 
   const addLike = async ()=>{
     await dispatch(addLikeToPost(id));
+    if (isReload){
+      window.location.reload();
+    }
   };
 
   const removePost = async ()=>{

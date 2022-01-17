@@ -5,7 +5,7 @@ import PostCard from '../post-card/post-card';
 import styles from './post-list.module.css';
 
 
-const PostList = ({ posts, title }) => {
+const PostList = ({ posts, title, isReload=false }) => {
   if (!posts.length) {
     return (
       <h1 style={{ textAlign: 'center' }}>
@@ -21,7 +21,7 @@ const PostList = ({ posts, title }) => {
       </h1>
       <div className={styles.content}>
         {posts.map(post => {
-          return (<PostCard key={post.id} post={post} />);
+          return (<PostCard key={post.id} post={post} isReload={isReload} />);
 
         })}
 

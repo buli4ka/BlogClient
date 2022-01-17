@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const uploadImages = async ( images, id )=>{
+export const uploadImages = async ( images, id, accessToken )=>{
   let fd = new FormData();
 
   for (let i = 0; i < images.length; i++) {
@@ -8,19 +8,28 @@ export const uploadImages = async ( images, id )=>{
     fd.append('File', images[i]);
     await axios.post(
       process.env.REACT_APP_API_BASE_URL + 'image/addPostImage/' + id
-      , fd,
+      , fd, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
     );
 
   }
 };
 
-export const uploadIcon = async ( icon, id )=>{
+export const uploadIcon = async ( icon, id, accessToken )=>{
   let fd = new FormData();
 
   fd.append('File', icon);
   await axios.post(
     process.env.REACT_APP_API_BASE_URL + 'icon/AddOrUpdateUserIcon/' + id
     , fd,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    },
   );
 
 

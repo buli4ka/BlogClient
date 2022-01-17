@@ -1,8 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
+import { createApi } from '@reduxjs/toolkit/dist/query/react';
+
+import { baseQuery } from './base-query';
 
 export const postApi = createApi({
   reducerPath: 'postFromApi',
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_BASE_URL }),
+  baseQuery: baseQuery, //fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_BASE_URL }),
   tagTypes: ['Post', 'Comment'],
   endpoints: (builder) => ({
     getAllPosts: builder.query({

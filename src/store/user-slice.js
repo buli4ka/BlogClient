@@ -92,7 +92,7 @@ export const register = (user, userIcon) => async dispatch => {
       return dispatch(showErrorNotification(error.data.message ?? error.data.title));
     }
     if (userIcon) {
-      await uploadIcon(userIcon, data.id);
+      await uploadIcon(userIcon, data.id, data.jwtToken);
     }
     dispatch(setCredentials(data));
     dispatch(hideModal({ id: MODALS.AUTHENTICATE }));
@@ -109,6 +109,7 @@ export const logout = () => dispatch => {
 
 export const update = (user, userToUpdate, userIcon) => async (dispatch, getState) => {
   const userId = getState().user.user?.id;
+  const jwtToken = getState().user.user?.accessToken;
   const isUpdating = isUserUpdatingData(user, userToUpdate);
 
   try {
@@ -124,7 +125,7 @@ export const update = (user, userToUpdate, userIcon) => async (dispatch, getStat
     }
 
     if (userIcon) {
-      await uploadIcon(userIcon, userId);
+      await uploadIcon(userIcon, userId, jwtToken);
     }
     dispatch(hideModal({ id: MODALS.UPDATE }));
 

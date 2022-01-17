@@ -25,7 +25,7 @@ const ProfilePage = () => {
   return (
     <div>
       {authorId === user?.id || authorId===undefined ? <ProfileUserInfo user={userData} />:<ProfileAuthorInfo author={userData} currentUser={user} />}
-      <PostList posts={userData?.posts} title="Posts" />
+      <PostList posts={userData?.posts} title="Posts" isReload />
     </div>
   );
 };
