@@ -21,7 +21,7 @@ const CommentList = ({ comments, postId, user }) => {
       )}
 
       {isCollapsed && comments.map((comment, key)=>
-        (<Comment key={key} comment={comment} currentUser={user} postId={postId} />),
+        !comment.isSubComment ? <Comment key={key} comment={comment} currentUser={user} postId={postId} /> : null,
       )}
     </div>
   );
