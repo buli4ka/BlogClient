@@ -8,4 +8,5 @@ export const ROUTES = {
   SUBSD: '/subscribed/',
   AUTHOR_PROFILE: '/profile/author/',
   ACCESS_DENIED: '/access-denied',
+  CHAT: '/chat',
 };

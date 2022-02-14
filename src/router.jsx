@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
-import SubscribersPage from './pages/subscribers-page/subscribers-page';
-import AuthPage from './pages/auth-page/auth-page';
-
+import SubscribersPage from 'pages/subscribers-page/subscribers-page';
+import AuthPage from 'pages/auth-page/auth-page';
+import ChatPage from 'pages/chat-page/chat-page';
 import LikedPosts from 'pages/liked-posts/liked-posts';
 import CreatePostPage from 'pages/create-post-page/create-post-page';
 import Navbar from 'components/navbar/navbar';
@@ -25,6 +25,8 @@ export default function Router({ user, theme }) {
       <Route from={ROUTES.LIKED_POSTS+':id'} exact component={LikedPosts} />
       <Route from={ROUTES.SUBS + ':id'} exact component={SubscribersPage} />
       <Route from={ROUTES.SUBSD + ':id'} exact component={SubscribedPage} />
+      <Route from={ROUTES.CHAT} exact component={ChatPage} />
+
 
       <Redirect to={ROUTES.MAIN} />
 

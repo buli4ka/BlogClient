@@ -13,6 +13,7 @@ import { ReactComponent as SunIcon } from 'assets/icons/sun.svg';
 import { ReactComponent as MoonIcon } from 'assets/icons/moon.svg';
 import { ReactComponent as LogoIcon } from 'assets/icons/logo.svg';
 import { ReactComponent as CreatePost } from 'assets/icons/craete-post.svg';
+import { ReactComponent as ChatIcon } from 'assets/icons/chat.svg';
 import { ROUTES } from 'constants/routes';
 
 
@@ -39,6 +40,7 @@ const Navbar = (user) => {
           <>
             <Button className={styles.navButton} renderIcon={() => <LogoutIcon />} onClick={logoutHandler} title="Logout" />
             <Button className={styles.navButton} renderIcon={() => <UserIcon />} onClick={() => history.push(ROUTES.PROFILE)} title="Profile" />
+            <Button className={styles.navButton} renderIcon={() => <ChatIcon />} onClick={()=>history.push(ROUTES.CHAT)} title="Chat" />
             <Button className={styles.navButton} renderIcon={() => <CreatePost />} onClick={()=>history.push(ROUTES.CREATE_POST)} title="Create post" />
 
           </>

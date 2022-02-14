@@ -1,0 +1,29 @@
+.contactsComponent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.search {
+    position: relative;
+    width: 100%;
+}
+
+.search input {
+    width: 100%;
+    max-width: 90%;
+    padding-left: 40px;
+}
+
+.iconContainer {
+    width: 50px;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.contactsList {
+
+}
